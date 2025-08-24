@@ -9,21 +9,22 @@ function View:new()
     return instance
 end
 
-function View:dump(field)
+function View:clear()
     if os.execute("cls") == nil then
         os.execute("clear")
     end
-    
-    print("=== Match-3 Game ===")
+end
+
+function View:dump(field)    
     print()
     
-    io.write("  ")
+    io.write("   ")
     for x = 0, 9 do
         io.write(string.format("%2d", x))
     end
     print()
     
-    io.write("  ")
+    io.write("   ")
     for x = 0, 9 do
         io.write(" -")
     end
@@ -48,20 +49,11 @@ function View:dump(field)
 end
 
 function View:showInstructions()
-    print("Управление:")
-    print("  m x y d - переместить кристалл")
-    print("    x, y - координаты (0-9)")
-    print("    d - направление (l/r/u/d)")
-    print("  q - выход")
-    print()
-end
-
-function View:showMessage(message)
-    print(">>> " .. message)
-end
-
-function View:showScore(score)
-    print("Счет: " .. score)
+    print("Controls:")
+    print("  m x y d - move crystal")
+    print("    x, y - coordinates (0-9)")
+    print("    d - direction (l/r/u/d)")
+    print("  q - quit")
     print()
 end
 
