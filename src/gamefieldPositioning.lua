@@ -1,9 +1,8 @@
--- GameField Positioning Module - Модуль позиционирования на игровом поле
--- Отвечает за определение позиций для различных эффектов
-
+-- GameField Positioning Module
 local GameFieldPositioning = {}
 GameFieldPositioning.__index = GameFieldPositioning
 
+-- Создание нового экземпляра
 function GameFieldPositioning:new(field_size)
     local instance = {
         field_size = field_size or 10
@@ -15,37 +14,6 @@ end
 -- Проверить, является ли позиция валидной
 function GameFieldPositioning:isValidPosition(x, y)
     return x >= 0 and x < self.field_size and y >= 0 and y < self.field_size
-end
-
--- Фильтровать позиции, оставляя только валидные
-function GameFieldPositioning:filterValidPositions(positions)
-    local valid_positions = {}
-    
-    for _, pos in ipairs(positions) do
-        if self:isValidPosition(pos.x, pos.y) then
-            table.insert(valid_positions, pos)
-        end
-    end
-    
-    return valid_positions
-end
-
--- Объединить несколько наборов позиций, исключая дубликаты
-function GameFieldPositioning:mergePositions(...)
-    local merged = {}
-    local seen = {}
-    
-    for _, position_set in ipairs({...}) do
-        for _, pos in ipairs(position_set) do
-            local key = pos.x .. "," .. pos.y
-            if not seen[key] then
-                seen[key] = true
-                table.insert(merged, pos)
-            end
-        end
-    end
-    
-    return merged
 end
 
 -- Преобразует направление в целевые координаты

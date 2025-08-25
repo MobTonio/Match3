@@ -5,6 +5,7 @@ SpecialStones.__index = SpecialStones
 
 local STONE_TYPES = {}
 
+-- Конструктор
 function SpecialStones:new()
     local instance = {
         stones = {},
@@ -14,22 +15,23 @@ function SpecialStones:new()
     return instance
 end
 
-function SpecialStones:createStone(x, y, stone_type, match_size)
+-- Создает новый специальный камень
+function SpecialStones:createStone(x, y, stone_type)
     local stone = {
         x = x,
         y = y,
-        type = stone_type,
-        created_from_match = match_size
+        type = stone_type
     }
     
     table.insert(self.stones, stone)
     return stone
 end
 
+-- Определяет тип специального камня на основе позиций совпадений
 function SpecialStones:determineStoneType(match_positions)
-    return nil 
 end
 
+-- Удаляет специальный камень
 function SpecialStones:removeStone(stone)
     for i, s in ipairs(self.stones) do
         if s == stone then
@@ -37,6 +39,10 @@ function SpecialStones:removeStone(stone)
             break
         end
     end
+end
+
+-- Опускает специальные камни на позиции после удаления
+function SpecialStones:drop(deletedPositions)
 end
 
 -- Получить типы камней для внешнего использования

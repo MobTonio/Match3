@@ -7,6 +7,7 @@ local View = require("src.view")
 local Game = {}
 Game.__index = Game
 
+-- Инициализация игры
 function Game:init()
     local instance = {
         field = Field:new(),
@@ -21,23 +22,12 @@ function Game:init()
     return instance
 end
 
-function Game:move(from, to)
-    local from_x, from_y = from.x, from.y
-    local to_x, to_y = to.x, to.y
-    
-    -- Проверяем, что координаты валидны
-    if not self.field:isValidPosition(from_x, from_y) or not self.field:isValidPosition(to_x, to_y) then
-        return false
-    end
-
-    if not self.field:canMakeMove(from, to) then
-        return false
-    end
-
-    self.field:swapCrystals(from_x, from_y, to_x, to_y)
-    return true
+-- Перемещение кристалла
+function Game:move(from, to)    
+    return self.field:move(from, to)
 end
 
+-- Обработка изменений на поле
 function Game:tick()
     self.changes_made = self.field:processMatches()
     
@@ -48,11 +38,13 @@ function Game:tick()
     return self.changes_made
 end
 
+-- Перемешивание кристаллов
 function Game:mix()
     self.field:init()
     self.view:dump(self.field:getGrid())
 end
 
+-- Вывод текущего состояния игры
 function Game:dump()
     self.view:dump(self.field:getGrid())
 end

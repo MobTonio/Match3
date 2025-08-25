@@ -1,14 +1,12 @@
 -- Destruction Pattern Module - Модуль паттернов уничтожения
--- Отвечает за определение позиций кристаллов для различных паттернов уничтожения
 
 local GameFieldPositioning = require("src.gamefieldPositioning")
 
 local DestructionPattern = {}
 DestructionPattern.__index = DestructionPattern
 
--- Типы паттернов уничтожения
 local PATTERN_TYPES = {
-    MATCHES = "matches"        -- Обычные совпадения 3+ в ряд
+    MATCHES = "matches"
 }
 
 function DestructionPattern:new(field_size)
@@ -23,25 +21,6 @@ end
 -- Основная функция для получения позиций по паттерну
 function DestructionPattern:getPositions(pattern, context)
     local pattern_type = pattern.type
-    
-    if pattern_type == PATTERN_TYPES.MATCHES then
-        return self:getMatchPositions(context)
-    else
-        return {}
-    end
-end
-
--- Паттерн: Обычные совпадения (3+ в ряд)
-function DestructionPattern:getMatchPositions(context)
-    local field_grid = context.field_grid
-    
-    if not field_grid then
-        return {}
-    end
-    
-    -- Здесь должна быть логика поиска совпадений
-    -- Пока возвращаем пустой массив, так как эта логика уже есть в Field
-    return {}
 end
 
 -- Получить доступные типы паттернов
@@ -60,7 +39,6 @@ function DestructionPattern:combinePatterns(patterns, context)
         end
     end
     
-    -- Удаляем дубликаты
     return self.positioning:mergePositions(all_positions)
 end
 

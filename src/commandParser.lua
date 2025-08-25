@@ -6,6 +6,7 @@ local GameFieldPositioning = require("src.gamefieldPositioning")
 local CommandParser = {}
 CommandParser.__index = CommandParser
 
+-- Конструктор
 function CommandParser:new()
     local instance = {
         positioning = GameFieldPositioning:new(10)
@@ -25,7 +26,6 @@ function CommandParser:parseCommand(input)
     if command == "m" and x and y and direction then
         x, y = tonumber(x), tonumber(y)
         
-        -- Используем GameFieldPositioning для валидации и преобразования
         local from = {x = x, y = y}
         local to = self.positioning:directionToCoordinates(from, direction)
         

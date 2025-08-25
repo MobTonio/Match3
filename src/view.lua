@@ -3,18 +3,21 @@
 local View = {}
 View.__index = View
 
+-- Конструктор
 function View:new()
     local instance = {}
     setmetatable(instance, self)
     return instance
 end
 
+-- Очищает консоль
 function View:clear()
     if os.execute("cls") == nil then
         os.execute("clear")
     end
 end
 
+-- Выводит текущее состояние игрового поля
 function View:dump(field)    
     print()
     
@@ -48,6 +51,7 @@ function View:dump(field)
     print()
 end
 
+-- Показывает инструкции по управлению
 function View:showInstructions()
     print("Controls:")
     print("  m x y d - move crystal")
